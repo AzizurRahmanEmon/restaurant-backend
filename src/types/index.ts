@@ -8,9 +8,6 @@ export interface AuthRequest extends Request {
     phone: string;
     role: string;
   };
-  params: any;
-  body: any;
-  query: any;
 }
 
 // OTP Storage (in-memory for demo, use Redis in production)
