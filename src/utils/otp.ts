@@ -3,7 +3,7 @@
 // src/utils/otp.ts
 // ============================================
 
-import crypto from "crypto";
+import * as crypto from "crypto";
 
 // In-memory OTP storage (use Redis in production for scalability)
 const otpStorage = new Map<string, { otp: string; expiresAt: Date }>();
