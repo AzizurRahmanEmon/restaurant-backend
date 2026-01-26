@@ -11,6 +11,7 @@ export interface AuthRequest extends Request {
   params: Request["params"];
   body: Request["body"];
   query: Request["query"];
+  headers: Request["headers"];
 }
 
 // OTP Storage (in-memory for demo, use Redis in production)
