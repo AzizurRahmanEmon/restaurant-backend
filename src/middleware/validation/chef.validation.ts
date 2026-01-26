@@ -4,6 +4,7 @@
 // ============================================
 
 import { Request, Response, NextFunction } from 'express';
+import validator from 'validator';
 import { sanitizeInput } from './common';
 
 export const validateChefCreate = (req: Request, res: Response, next: NextFunction) => {
@@ -190,7 +191,6 @@ export const validateSocialLinks = (req: Request, res: Response, next: NextFunct
     }
 
     const errors: string[] = [];
-    const validator = require('validator');
 
     if (linkedin !== undefined && linkedin !== '') {
         if (linkedin.length > 200) {

@@ -5,7 +5,7 @@
 
 import { Request, Response, NextFunction } from "express";
 import validator from "validator";
-import { sanitizeInput, validateEmail, validatePhone } from "./common";
+import { sanitizeInput, validateEmail, validatePhone, validateObjectId } from "./common";
 
 export const validateMessageCreate = (
   req: Request,
@@ -241,8 +241,6 @@ export const validateBulkDelete = (
     });
   }
 
-  // Import validateObjectId from common
-  const { validateObjectId } = require("./common");
   const invalidIds = ids.filter((id: string) => !validateObjectId(id));
   if (invalidIds.length > 0) {
     return res.status(400).json({
