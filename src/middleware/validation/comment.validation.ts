@@ -7,7 +7,7 @@ import { sanitizeInput } from "./common";
 export const validateCommentCreate = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { name, email, comment } = req.body;
   const errors: string[] = [];
@@ -56,11 +56,21 @@ export const validateCommentCreate = (
 export const validateCommentLike = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { commentId } = req.params;
 
-  if (!commentId || !/^[0-9a-fA-F]{24}$/.test(commentId)) {
+  if (!commentId) {
+    return res.status(400).json({
+      success: false,
+      message: "Comment ID is required",
+    });
+  }
+
+  // Ensure commentId is a string (req.params can be string | string[])
+  const id = Array.isArray(commentId) ? commentId[0] : commentId;
+
+  if (!id || !/^[0-9a-fA-F]{24}$/.test(id)) {
     return res.status(400).json({
       success: false,
       message: "Invalid comment ID",
@@ -73,7 +83,7 @@ export const validateCommentLike = (
 export const validateCommentApproval = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { isApproved } = req.body;
 
